@@ -1,0 +1,210 @@
+$black: #000;
+$green: #3bc36f;
+$red: #ee4b42;
+$orange: #f8931f;
+$blue: #5bb4ba;
+$white: #fff;
+$ash: #ffffff5e;
+
+$heights: (8.3, 7.2, 2, 9.7, 4, 9);
+$offsets: (0, 8.1, 13.2, 13.3, 19, 0);
+$numbers: (8.3, 15.3, 15.2, 23.1, 23, 9);
+$lines: (8.3, 15.3, 13.4, 23.1, 19.2);
+
+.zero {
+    position: absolute;
+    bottom: 19%;
+    left: 4%;
+}
+.bar-graph {
+    padding: 0 3%;
+    height: 50%;
+    width: 80%;
+    margin: 6% 10%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: justify;
+    span {
+        position: absolute;
+        bottom: -2%;
+        left: 7%;
+    }
+    & p {
+        font-size: 16px;
+        position: absolute;
+    }
+    & h5 {
+        position: absolute;
+        bottom: -80px;
+        width: 8%;
+        text-align: center;
+    }
+    .curve {
+        height: 30%;
+        bottom: 27%;
+    }
+    & svg {
+        height: 20px;
+        position: absolute;
+        path {
+            stroke-width: 2;
+        }
+        .inc {
+            stroke: $green;
+        }
+        .dec {
+            stroke: $red;
+        }
+        .next {
+            stroke: $orange;
+        }
+    }
+    & .bar {
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 8%;
+        margin: 0 1.13%;
+        height: 60px;
+        overflow: hidden;
+
+        &:after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: $green;
+            left: 0;
+            opacity: 0;
+            transform: translate3d(0, 100%, 0);
+        }
+
+        &.down:after {
+            background: $red;
+            transform: translate3d(0, -100%, 0);
+        }
+
+        &.start:after {
+            background: $orange;
+            transform: translate3d(0, 100%, 0);
+        }
+    }
+
+    hr {
+        position: absolute;
+        top: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto 8%;
+        background: $black;
+    }
+}
+
+@for $i from 0 through 6 {
+    .bar-graph {
+        p:nth-of-type(#{$i}) {
+            left: #{((($i - 1) * 1.9%) + ($i * 12%)) + 3%};
+        }
+        svg:nth-of-type(#{$i}) {
+            left: #{((($i - 1) * 1.9%) + ($i * 12%)) + 9%};
+        }
+        h5:nth-of-type(#{$i}) {
+            left: #{((($i - 1) * 1.9%) + ($i * 12%)) + 1%};
+        }
+        .bar:nth-of-type(#{$i}) {
+            left: #{(($i - 1) * 1.9%) + ($i * 12%)};
+
+            &:after {
+                animation: bar-anim 0.8s cubic-bezier(0.23, 1, 0.32, 1) #{$i * 0.1s};
+                animation-fill-mode: both;
+            }
+        }
+    }
+}
+
+@each $height in $heights {
+    $i: index($heights, $height);
+    .bar-graph {
+        .bar:nth-of-type(#{$i}) {
+            height: ($height) * 3%;
+        }
+    }
+}
+
+@each $offset in $offsets {
+    $i: index($offsets, $offset);
+    .bar-graph {
+        .bar:nth-of-type(#{$i}) {
+            bottom: ($offset) * 3%;
+        }
+    }
+}
+
+@each $number in $numbers {
+    $i: index($numbers, $number);
+    p:nth-of-type(#{$i}) {
+        bottom: ($number) * 3%;
+    }
+}
+
+@each $line in $lines {
+    $i: index($lines, $line);
+    svg:nth-of-type(#{$i}) {
+        bottom: (($line) * 3%) - 2%;
+    }
+}
+
+@keyframes bar-anim {
+    to {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+    }
+}
+
+.footer {
+    height: 15%;
+    background: $blue;
+    display: flex;
+    padding: 15px;
+    position: absolute;
+    bottom: 0;
+    width: 95%;
+    margin: auto 1%;
+    .left {
+        display: flex;
+        margin: 1% 3%;
+        width: 20%;
+        img {
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+        }
+        div {
+            padding: 5% 14%;
+            border-right: inset $ash;
+            color: $white;
+        }
+        .p-head {
+            font-size: 18px;
+            text-align: center;
+            margin: 0;
+            font-weight: bold;
+        }
+        .p-body {
+            text-align: center;
+            margin: 0;
+            font-weight: 400;
+        }
+    }
+    .right {
+        font-weight: 400;
+        color: $white;
+        margin: 2%;
+    }
+}

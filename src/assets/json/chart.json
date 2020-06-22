@@ -1,0 +1,40 @@
+{
+  "title": "Revenue Waterfall",
+  "chart": [
+    {
+      "title": "Last Month Revenue",
+      "amount": 38297,
+      "arc": "inc",
+      "level": "bar"
+    },
+    {
+      "title": "Gainers",
+      "amount": 17974,
+      "arc": "dec",
+      "level": "bar"
+    },
+    {
+      "title": "Losers",
+      "amount": 3979,
+      "arc": "inc",
+      "level": "bar down"
+    },
+    {
+      "title": "New Entrants",
+      "amount": 31282,
+      "arc": "dec",
+      "level": "bar"
+    },
+    {
+      "title": "Exits",
+      "amount": 20362,
+      "arc": "next",
+      "level": "bar down"
+    },
+    {
+      "title": "This Month Revenue",
+      "amount": 53225,
+      "level": "bar start"
+    }
+  ]
+}

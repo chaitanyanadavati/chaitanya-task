@@ -1,0 +1,32 @@
+<div>
+    <div class="bar-graph">
+        <ng-container *ngIf="chartData">
+            <h3>{{chartData.title}}</h3>
+            <span>0</span>
+            <ng-container *ngFor="let item of chartData.chart">
+                <p>${{item.amount}}</p>
+                <h5>{{item.title}}</h5>
+                <svg [ngClass]="{'curve': item.arc === 'next'}">
+                    <path *ngIf="item.arc === 'inc'" class="inc" d="M0,10 H95%" />
+                    <path *ngIf="item.arc === 'dec'" class="dec" d="M0,10 H95%" />
+                    <path *ngIf="item.arc === 'next'" class="next" d="M0,0 L95,140%" />
+                </svg>
+                <div class="{{item.level}}"></div>
+            </ng-container>
+        </ng-container>
+        <hr>
+    </div>
+
+    <div class="footer">
+        <div class="left">
+            <img src="{{footerData.image}}" alt="">
+            <div>
+                <p class="p-head">{{footerData.author}}</p>
+                <p class="p-body">{{footerData.authorDesignation}}</p>
+            </div>
+        </div>
+        <div class="right">
+            <p>{{footerData.summary}}</p>
+        </div>
+    </div>
+</div>
